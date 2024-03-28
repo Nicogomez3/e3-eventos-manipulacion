@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+body {
+    background-color: #252422;
+    color: white;
+}
+
+header {
+    background-color: #d62828 ;
+    padding: 0 20px;
+}
+
+.navbar {
+    padding: 20px;
+}
+
+.navbar__logo {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+    gap: 25px;
+}
+
+.form__field {
+    margin-top: 10px;
+}
+
+.form__input {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: transparent;
+    outline: none;
+    border: 1px solid #f77f00;
+    color: rgb(150, 150, 150);
+    font-size: 16px;
+}
+
+.form__submit__btn {
+    padding: 10px 15px;
+    border: none;
+    margin-top: 5px;
+    background: #c21500;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ffc500, #c21500);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ffc500, #c21500); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 100%;
+}
+
+
+.card__container {
+    background-color: #fcbf49 ;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    max-width: 350px;
+}
+
+.card__img {
+    display: block;
+    width: 200px;
+    border-radius: 10px;
+}
+
+.card__title {
+    margin-top: 5px;
+}
+
+.card__info {
+    display: flex;
+    gap: 20px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.form__field.error input {
+    border: 1px solid #dc3545;
+  }
+  
+  .form__field small {
+    color: #dc3545;
+    max-width: 350px;
+    text-align: center;
+    display: none;
+  }
+  
+  .form__field.success input {
+    border: 1px solid #28a745;
+  }
+  
+  #form__error {
+    color: #dc3545;
+    font-size: 1rem;
+    margin: 8px 0px;
+    max-width: 350px;
+    text-align: center;
+  }
