@@ -79,7 +79,7 @@ const showError = (input, message) => {
   error.textContent = message;
 }
 
-const errorNumber = () => {
+const errorNumber = (input) => {
   return `El numero ingresado no coincide`
 }
 
@@ -103,8 +103,11 @@ const showSuccess = (input) => {
      showError(input, "Llena el campo")
      return;
    }
-
-   
+   const numberId = Number(numberInput.value);
+   if(numberId > 5) {
+    cardContainer.innerHTML = errorNumber();
+    return
+  }
 
    showSuccess(input)
    valid = true;
@@ -113,10 +116,11 @@ const showSuccess = (input) => {
  }
 
 
-
-
-
  const createCardsHTML = (pizza) => {
+    if (!pizza) {
+      return ''; 
+  }
+
     return `
       <div class="card__container">
       <img class="card__img" src=" ${pizza.imagen} " alt="">
@@ -136,44 +140,41 @@ const showSuccess = (input) => {
  };
 
 
-  const renderCards = () => {
-
-    cardContainer.innerHTML = pizzaFind.map((pizza) => createCardsHTML(pizza));
-  
-  };
+ 
 
 
  const renderCardsList = () => {
     const numberId = Number(numberInput.value);
     pizzaFind = [pizzas.find(pizza => pizza.id === numberId)];
 
-    if(pizzaFind){
-      cardContainer.innerHTML = createCardsHTML(pizzaFind)
-      return
+    if (pizzaFind.length > 0) {
+      cardContainer.innerHTML = createCardsHTML(pizzaFind[0]);
+      return;
     }
 
-    if(numberId > 5) {
-      cardContainer.innerHTML = errorNumber();
-      return
-    }
+    
 
     
 
  }
 
+ const renderCards = () => {
+
+  cardContainer.innerHTML = pizzaFind.map((pizza) => createCardsHTML(pizza));
+
+};
 
 
 
 const search = (e) => {
   e.preventDefault()
   
-
+  
   renderCardsList()
-  saveLocalStorage(pizzaFind)
   renderCards()
+  saveLocalStorage(pizzaFind)
   formContainer.reset()
   checkNumber(numberInput)
- 
  
 }
 
@@ -185,7 +186,6 @@ const init = () => {
   document.addEventListener('DOMContentLoaded', renderCards)
   formContainer.addEventListener("submit", search)
   numberInput.addEventListener("input", () => checkNumber(numberInput))
-
 };
 
 init()
