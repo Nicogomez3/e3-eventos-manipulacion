@@ -48,14 +48,25 @@ const pizzas = [
 
 
 const formContainer = document.getElementById("form__container");
-const numberInput = document.getElementById("number");
+const numberInput = document.querySelector(".number__input")
+const cardContainer = document.querySelector(".container")
 
+// formContainer.addEventListener('submit', () => {
+//   console.log(`Elemento enviado`)
+// })
+
+let pizzaFind = JSON.parse(localStorage.getItem('pizzas')) || []
+ 
+const saveLocalStorage = () => {
+  localStorage.setItem('pizzas', JSON.stringify(pizzaFind))
+}
 
 //Funcion para que el campo no esté vacio
 
-const isEmpty = (input) => {
-  return !input.value.trim().length;
-}
+ const isEmpty = (input) => {
+   return !input.value.trim().length;
+ }
+
 
 //Funcion de error
 
@@ -68,6 +79,10 @@ const showError = (input, message) => {
   error.textContent = message;
 }
 
+const errorNumber = () => {
+  return `El numero ingresado no coincide`
+}
+
 const showSuccess = (input) => {
   const formField = input.parentElement;
   formField.classList.remove("error");
@@ -78,66 +93,99 @@ const showSuccess = (input) => {
 
 
 
-const checkNumber = (input) => {
-  let valid = false 
+
+ const checkNumber = (input) => {
+   let valid = false 
 
  
 
-  if(isEmpty(input)) {
-    showError(input, "Llena el campo")
-    return;
-  }
+   if(isEmpty(input)) {
+     showError(input, "Llena el campo")
+     return;
+   }
+
+   
+
+   showSuccess(input)
+   valid = true;
+   return valid
+
+ }
 
 
 
-  showSuccess(input)
-  valid = true;
-  return valid
 
-}
 
-const cardContainer = document.querySelector(".container")
-
-const createCard = (pizza) => {
-  const {nombre, precio, ingredientes, imagen} = pizza
-
-  return `
-    <div class="card__container">
-    <img class="card__img" src=" ${imagen} " alt="">
-    <div class="card__details">
+ const createCardsHTML = (pizza) => {
+    return `
+      <div class="card__container">
+      <img class="card__img" src=" ${pizza.imagen} " alt="">
+      <div class="card__details">
         
-    </div>
-    <div class="card__title">
-        <h2> ${nombre} </h2>
-    </div>
-    <div class="card__info">
-        <p> Ingredientes: ${ingredientes} </p>
-        <p> Precio: $ ${precio} </p>
-    </div>
-  `
+      </div>
+      <div class="card__title">
+          <h2> ${pizza.nombre} </h2>
+      </div>
+      <div class="card__info">
+          <p> Ingredientes: ${pizza.ingredientes}  </p>
+          <p> Precio:  ${pizza.precio} </p>
+         
+      </div>
+    `
   
-};
-
-cardContainer.innerHTML = pizzas.map((pizza) => createCard(pizza)).join('');
-cardContainer.style.display = "none";
+ };
 
 
+  const renderCards = () => {
 
-const id = pizzas.filter((pizza) => {
-  if(pizza.id >= 1 && pizza.id <= 5 ) {
-    console.log(`Las pizzas disponibles son: ${pizza.nombre}`)
-  } else {
-    console.log(`Esa pizza no está disponible`)
-  }
-})
+    cardContainer.innerHTML = pizzaFind.map((pizza) => createCardsHTML(pizza));
+  
+  };
+
+
+ const renderCardsList = () => {
+    const numberId = Number(numberInput.value);
+    pizzaFind = [pizzas.find(pizza => pizza.id === numberId)];
+
+    if(pizzaFind){
+      cardContainer.innerHTML = createCardsHTML(pizzaFind)
+      return
+    }
+
+    if(numberId > 5) {
+      cardContainer.innerHTML = errorNumber();
+      return
+    }
+
+    
+
+ }
+
+
+
 
 const search = (e) => {
   e.preventDefault()
+  
+
+  renderCardsList()
+  saveLocalStorage(pizzaFind)
+  renderCards()
+  formContainer.reset()
+  checkNumber(numberInput)
+ 
+ 
 }
 
+
+
+
+
 const init = () => {
-  numberInput.addEventListener("input", () => checkNumber(numberInput))
+  document.addEventListener('DOMContentLoaded', renderCards)
   formContainer.addEventListener("submit", search)
+  numberInput.addEventListener("input", () => checkNumber(numberInput))
+
 };
 
 init()
