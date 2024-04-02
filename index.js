@@ -79,8 +79,17 @@ const showError = (input, message) => {
   error.textContent = message;
 }
 
-const errorNumber = (input) => {
-  return `El numero ingresado no coincide`
+
+// const errorNumber = (input) => {
+
+//   return `El numero ingresado no coincide`
+// }
+
+const errorNumber = () => {
+  const errorMessageContainer = document.createElement('div');
+  errorMessageContainer.textContent = 'El número ingresado no coincide';
+  errorMessageContainer.classList.add('error__message');
+  return errorMessageContainer.outerHTML;
 }
 
 const showSuccess = (input) => {
@@ -106,7 +115,7 @@ const showSuccess = (input) => {
    const numberId = Number(numberInput.value);
    if(numberId > 5) {
     cardContainer.innerHTML = errorNumber();
-    return
+    return `El numero no coincide`
   }
 
    showSuccess(input)
@@ -131,9 +140,12 @@ const showSuccess = (input) => {
           <h2> ${pizza.nombre} </h2>
       </div>
       <div class="card__info">
-          <p> Ingredientes: ${pizza.ingredientes}  </p>
-          <p> Precio:  ${pizza.precio} </p>
+          <p class="card__text"> Ingredientes :  ${pizza.ingredientes} </p>
+          <p> Precio: <span class="span__bold"> ${pizza.precio} </span>  </p>
          
+      </div>
+      <div class="error__number">
+      <small></small>
       </div>
     `
   
@@ -152,23 +164,16 @@ const showSuccess = (input) => {
       return;
     }
 
-    
-
-    
-
  }
 
  const renderCards = () => {
-
   cardContainer.innerHTML = pizzaFind.map((pizza) => createCardsHTML(pizza));
-
 };
 
 
 
 const search = (e) => {
   e.preventDefault()
-  
   
   renderCardsList()
   renderCards()

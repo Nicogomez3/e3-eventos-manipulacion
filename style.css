@@ -1,9 +1,15 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     list-style-type: none;
+    font-family: "poppins", sans-serif;
 }
 
 body {
@@ -72,12 +78,12 @@ main {
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-    max-width: 350px;
+    max-width: 450px;
 }
 
 .card__img {
     display: block;
-    width: 200px;
+    width: 350px;
     border-radius: 10px;
 }
 
@@ -92,25 +98,45 @@ main {
     margin-top: 10px;
 }
 
-.form__field.error input {
+/* .form__field.error input {
     border: 1px solid #dc3545;
-  }
+  } */
   
   .form__field small {
     color: #dc3545;
     max-width: 350px;
     text-align: center;
     display: none;
+    font-size: 16px;
+    margin-top: 5px;
   }
   
-  .form__field.success input {
+  /* .form__field.success input {
     border: 1px solid #28a745;
   }
-  
+   */
   #form__error {
     color: #dc3545;
     font-size: 1rem;
     margin: 8px 0px;
     max-width: 350px;
     text-align: center;
+  }
+
+  .error__message {
+    color: #dc3545;
+    font-size: 18px;
+  }
+
+  .span__bold {
+    background-color: #c21500;
+    border-radius: 16px;
+    padding: 5px;
+    font-weight: bold;
+  }
+
+  .card__text {
+    background-color: #c21500;
+    border-radius: 16px;
+    padding: 5px;
   }
