@@ -100,7 +100,13 @@ const showSuccess = (input) => {
   error.textContent = "";
 };
 
-
+const numberId = () => {
+  const numberId = Number(numberInput.value);
+  if(numberId > 5) {
+   cardContainer.innerHTML = errorNumber();
+   return 
+ }
+}
 
 
  const checkNumber = (input) => {
@@ -112,10 +118,16 @@ const showSuccess = (input) => {
      showError(input, "Llena el campo")
      return;
    }
-   const numberId = Number(numberInput.value);
-   if(numberId > 5) {
-    cardContainer.innerHTML = errorNumber();
-    return `El numero no coincide`
+
+  //   const numberId = Number(numberInput.value);
+  //   if(numberId > 5) {
+  //    cardContainer.innerHTML = errorNumber();
+  //    return 
+  //  }
+
+  if(numberId(input)) {
+    errorNumber()
+    return
   }
 
    showSuccess(input)
