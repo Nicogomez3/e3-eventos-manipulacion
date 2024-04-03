@@ -100,6 +100,14 @@ const showSuccess = (input) => {
   error.textContent = "";
 };
 
+
+const pizzaFound = () => {
+  const numberId = Number(numberInput.value);
+  pizzaFind = [pizzas.find(pizza => pizza.id === numberId)];
+  return
+}
+
+
 const numberId = () => {
   const numberId = Number(numberInput.value);
   if(numberId > 5) {
@@ -168,8 +176,11 @@ const numberId = () => {
 
 
  const renderCardsList = () => {
-    const numberId = Number(numberInput.value);
-    pizzaFind = [pizzas.find(pizza => pizza.id === numberId)];
+    // const numberId = Number(numberInput.value);
+    // pizzaFind = [pizzas.find(pizza => pizza.id === numberId)];
+     if(pizzaFound(numberId)) {
+      return 
+     }
 
     if (pizzaFind.length > 0) {
       cardContainer.innerHTML = createCardsHTML(pizzaFind[0]);
